@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> -->
+
+    <title>My home Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template 
+    <link href="GameRank.css" rel="stylesheet">-->
+    <style>
+        header .form-group{margin-top: 20px;}
+        .form-control {display:inline-block; width:auto; margin-right: 100px;min-width:260px}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="collapse bg-dark show" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="/HomePage.html" method="post">
+                            <div class="form-group">
+                                <select id="GameName" name="GameName" class="form-control">
+                                    <option value="" selected disabled>Choose a Game</option>
+                                    <!-- the value of game must = value in table-->
+                                    <option value="1">Smash Brother's Ultimate</option>
+                                    <option value="2">Smash Brother's Melee</option>
+                                    <option value="3">Magic</option>
+                                    <option value="4">Halo</option>
+                                </select>
+                                <select name="Season" class="form-control">
+                                    <!-- the value of game must = value in table-->
+                                    <option value="1"selected>Fall Season</option>
+                                    <option value="2">Spring Season</option>
+                                </select>
+                                <select name="Year" class="form-control">
+                                    <!-- the value of game must = value in table-->
+                                    <option value="1" selected>2015</option>
+                                    <option value="2">2016</option>
+                                    <option value="3">2017</option>
+                                    <option value="4">2018</option>
+                                    <option value="5">2019</option>
+                                    <option value="6">2020</option>
+                                    <option value="7">2021</option>
+                                    <option value="8">2022</option>
+                                </select>
+                            </div>
+                            <button id ="SubmitButton" type="submit" disabled class="btn btn-default">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-between">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                    <strong>Gaming info</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+
+        <div class="py-5 bg-light">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--need php to see if "post" has value
+                        if it doesnt then display helpfull text to help people use the search-->
+                        <table id="results" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Tag</th>
+                                    <th>Win %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--Php to take results in from search bar(for persise players)and from
+                                    drop down
+                                    then use html to fit results into the table like see bellow
+                                
+                                <tr>
+                                    <td>Rank</td>
+                                    <td>Name</td>
+                                    <td>Tag</td>
+                                    <td>Win %</td>
+                                </tr>
+                            -->
+                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Tag</th>
+                                    <th>Win %</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Back to top</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="./js/jquery-3.5.1.js"></script>
+    <script src="./js/jquery.dataTables.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    
+
+    <script>
+        $(document).ready(function ()
+            {
+                $('#results').DataTable();
+            });
+        
+        $("#GameName").on("change", function ()
+            {
+                if($(this).val()== ""){
+                    $("#SubmitButton").prop("disabled", true);
+                } else{
+                    $("#SubmitButton").prop("disabled", false);
+                }
+            });
+    </script>
+    
+</body>
+
+</html>
