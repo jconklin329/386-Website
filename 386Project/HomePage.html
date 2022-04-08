@@ -2,6 +2,11 @@
 <html lang="en">
 
 <head>
+    <!--- make a separate connection file -->
+    <?php
+    $connection=@mysqli_connect('localhost','jconklin1','jconklin1','RankingDB');
+    ?>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -34,26 +39,25 @@
                                 <select id="GameName" name="GameName" class="form-control">
                                     <option value="" selected disabled>Choose a Game</option>
                                     <!-- the value of game must = value in table-->
-                                    <option value="1">Smash Brother's Ultimate</option>
-                                    <option value="2">Smash Brother's Melee</option>
-                                    <option value="3">Magic</option>
-                                    <option value="4">Halo</option>
+                                    <option value="smash_ultimate" selected>Smash Brother's Ultimate</option>
+                                    <option value="smash_melee">Smash Brother's Melee</option>
+                                    <option value="magic">Magic</option>
                                 </select>
                                 <select name="Season" class="form-control">
                                     <!-- the value of game must = value in table-->
-                                    <option value="1"selected>Fall Season</option>
-                                    <option value="2">Spring Season</option>
+                                    <option value="-6-01">Fall Season</option>
+                                    <option value="-12-31" selected>Spring Season</option>
                                 </select>
                                 <select name="Year" class="form-control">
                                     <!-- the value of game must = value in table-->
-                                    <option value="1" selected>2015</option>
-                                    <option value="2">2016</option>
-                                    <option value="3">2017</option>
-                                    <option value="4">2018</option>
-                                    <option value="5">2019</option>
-                                    <option value="6">2020</option>
-                                    <option value="7">2021</option>
-                                    <option value="8">2022</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022" selected>2022</option>
                                 </select>
                             </div>
                             <button id ="SubmitButton" type="submit" disabled class="btn btn-default">Submit</button>
@@ -108,6 +112,16 @@
                                     <td>Win %</td>
                                 </tr>
                             -->
+                            <?php
+                                $year = $_POST['Year'];
+                                $season = $_POST['Season'];
+                                $game_name = $_POST['GameName'];
+                                $query="SELECT name, tag, win_percent 
+                                        FROM Players, Plays_In
+                                        WHERE Players.SID = Plays_In.SID AND end_date = " . $year . $season . " AND game_name = " . $game_name . "
+                                        ORDER BY win_percent DESC";
+                                $result = mysqli_query($connection, $query);
+                            ?>
                                 
                             </tbody>
                             <tfoot>
