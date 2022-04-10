@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-    <!--- make a separate connection file -->
     <?php
-    $connection=@mysqli_connect('localhost','jconklin1','jconklin1','RankingDB');
+	require('connect.php');
     ?>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -90,7 +88,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!--need php to see if "post" has value
-                        if it doesnt then display helpfull text to help people use the search-->
+                        if it doesnt then display helpful text to help people use the search-->
                         <table id="results" class="display" style="width:100%">
                             <thead>
                                 <tr>
@@ -101,7 +99,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--Php to take results in from search bar(for persise players)and from
+                                <!--Php to take results in from search bar(for precise players)and from
                                     drop down
                                     then use html to fit results into the table like see bellow
                                 
@@ -120,7 +118,16 @@
                                         FROM Players, Plays_In
                                         WHERE Players.SID = Plays_In.SID AND end_date = " . $year . $season . " AND game_name = " . $game_name . "
                                         ORDER BY win_percent DESC";
-                                $result = mysqli_query($connection, $query);
+                                $result=mysqli_query($connection, $query);
+
+				while($row=mysqli_fetch_array($result))
+				{
+					echo "<tr>";
+					echo "<td>" . $row['name'] . "</td>";
+					echo "<td>" . $row['tag'] . "</td>";
+					echo "<td>" . $row['win_percent'] . "</td>";
+					echo "</tr>";
+				}
                             ?>
                                 
                             </tbody>
