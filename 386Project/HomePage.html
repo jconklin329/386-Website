@@ -99,7 +99,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--Php to take results in from search bar(for precise players)and from
+                               <!--
+				    Php to take results in from search bar(for precise players)and from
                                     drop down
                                     then use html to fit results into the table like see bellow
                                 
@@ -109,7 +110,8 @@
                                     <td>Tag</td>
                                     <td>Win %</td>
                                 </tr>
-                            -->
+			       -->
+                            
                             <?php
                                 $year = $_POST['Year'];
                                 $season = $_POST['Season'];
@@ -123,6 +125,7 @@
 				while($row=mysqli_fetch_array($result))
 				{
 					echo "<tr>";
+					echo "<td>" . "1" . "</td>";
 					echo "<td>" . $row['name'] . "</td>";
 					echo "<td>" . $row['tag'] . "</td>";
 					echo "<td>" . $row['win_percent'] . "</td>";
